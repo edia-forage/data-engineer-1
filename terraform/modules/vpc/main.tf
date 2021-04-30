@@ -14,7 +14,6 @@ resource "google_compute_network" "network" {
 resource "google_compute_shared_vpc_host_project" "shared_vpc_host" {
   provider = google-beta
 
-  count      = "${var.shared_vpc_host} ? 1 : 0"
   project    = "${var.project}"
   depends_on = [google_compute_network.network]
 }
