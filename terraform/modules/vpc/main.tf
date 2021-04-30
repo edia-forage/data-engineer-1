@@ -1,19 +1,31 @@
-module "vpc" {
-  source  = "../vpc-parent"
-
-  project_id   = "${var.project}"
-  network_name = "${var.env}"
-
-  subnets = [
-    {
-      subnet_name   = "${var.env}-subnet-01"
-      subnet_ip     = "10.${var.env == "dev" ? 10 : 20}.10.0/24"
-      subnet_region = "us-west1"
-    },
-  ]
-
-  secondary_ranges = {
-    "${var.env}-subnet-01" = []
-  }
+resource "google_compute_network" "network" {
+  name                            = "${var.env}"
+  auto_create_subnetworks         = "${var.auto_create_subnetworks}"
+  routing_mode                    = "${var.routing_mode}"
+  project                         = "${var.project}"
+  description                     = "${var.description}"
+  delete_default_routes_on_create = "${var.delete_default_internet_gateway_routes}"
+  mtu                             = "${var.mtu}"
 }
 
+/******************************************
+	Shared VPC
+ *****************************************/
+resource "google_compute_shared_vpc_host_project" "shared_vpc_host" {
+  provider = google-beta
+
+  count      = "${var.shared_vpc_host} ? 1 : 0"
+  project    = "${var.project_id}"
+  depends_on = [google_compute_network.network]
+}
+
+resource "google_compute_subnetwork" "network-with-private-secondary-ip-ranges" {
+  name          = "${var.env}-subnetwork"
+  ip_cidr_range = "10.2.0.0/16"
+  region        = "asia-south1"
+  network       = google_compute_network.network.id
+  secondary_ip_range {
+    range_name    = "tf-${var.env}-secondary-range-update1"
+    ip_cidr_range = "192.168.10.0/24"
+  }
+}
