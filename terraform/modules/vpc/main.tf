@@ -1,5 +1,5 @@
 module "vpc" {
-  source  = "terraform-google-modules/network/google"
+  source  = "vpc-parent"
   version = "0.6.0"
 
   project_id   = "${var.project}"
