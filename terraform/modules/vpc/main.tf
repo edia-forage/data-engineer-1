@@ -1,6 +1,5 @@
 module "vpc" {
   source  = "../vpc-parent"
-  version = "0.6.0"
 
   project_id   = "${var.project}"
   network_name = "${var.env}"
