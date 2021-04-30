@@ -1,5 +1,5 @@
 module "vpc" {
-  source  = "vpc-parent"
+  source  = "../vpc-parent"
   version = "0.6.0"
 
   project_id   = "${var.project}"
