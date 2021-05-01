@@ -70,7 +70,7 @@ data "google_iam_policy" "admin" {
     role = "roles/iam.serviceAccountUser"
 
     members = [
-      "serviceAccount:var.cicd_sa",
+      "serviceAccount:${var.cicd_sa}"
     ]
   }
 }
@@ -97,4 +97,8 @@ module "data_flow_job1" {
     inputFile = "gs://anz-raw-anz-bigdata/shakespeare/kinglear.txt"
     output    = "gs://anz-transformed-anz-bigdata/output/my_output"
   }
+
+  depends_on = [
+    "google_service_account_iam_policy.admin-account-iam",
+  ]
 }
