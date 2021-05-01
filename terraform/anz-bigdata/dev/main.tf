@@ -40,7 +40,7 @@ module "bucket_request" {
 module "bucket_iam_ingestion_sa" {
   source                    = "../../modules/bucket-iam"
   bucket_name               = "${module.bucket_request.bucket_name}"
-  members                   = ["${module.bucket_sa_account.email}"]
+  members                   = ["${module.bucket_sa_account.sa_email}"]
 }
 
 
