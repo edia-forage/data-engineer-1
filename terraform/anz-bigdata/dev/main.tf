@@ -47,11 +47,13 @@ module "transformed_bucket_request" {
 module "bucket_iam_ingestion_sa" {
   source                    = "../../modules/bucket-iam"
   bucket_name               = "${module.raw_bucket_request.bucket_name}"
+  role_id                   = "roles/storage.admin"
   members                   = ["serviceAccount:${module.bucket_sa_account.sa_email}"]
 }
 
 module "bucket_iam_transformed_sa" {
   source                    = "../../modules/bucket-iam"
+  role_id                   = "roles/storage.admin"
   bucket_name               = "${module.transformed_bucket_request.bucket_name}"
   members                   = ["serviceAccount:${module.bucket_sa_account.sa_email}"]
 }
