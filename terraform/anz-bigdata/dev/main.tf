@@ -75,7 +75,7 @@ module "data_flow_job1" {
   temp_gcs_location     = module.transformed_bucket_request.bucket_name
   service_account_email = module.bucket_sa_account.sa_email
   network_self_link     = module.vpc.network_self_link
-  subnetwork_self_link  = module.vpc.sub_network_self_link[0]
+  subnetwork_self_link  = module.vpc.sub_network_self_link
   machine_type          = "n1-standard-1"
 
   parameters = {
