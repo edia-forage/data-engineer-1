@@ -21,7 +21,7 @@ module "firewall" {
 module "bucket_sa_account" {
   source = "../../modules/sa"
   project = "${var.project}"  
-  sa_name = "ingestion_sa"
+  sa_name = "ingestion-sa"
   sa_display_name = "sa for bucket access which stores ingested data"
 }
 
