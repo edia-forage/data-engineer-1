@@ -18,3 +18,22 @@ module "firewall" {
   network  = "${module.vpc.network_name}"
 }
 
+module "bucket_sa_account" {
+  source = "../../modules/sa"
+  project = "${var.project}"  
+  sa_name = "ingestion_sa"
+  sa_display_name = "sa for bucket access which stores ingested data"
+}
+
+module "gcs_bucket_kms_key_ring" {
+  source                    = "./modules/kms-cmek-keyring"
+  project_id                = "${var.project}"
+}
+
+module "bucket_request" {
+  source                    = "./modules/gcs-bucket"
+  project_id                = "${var.project}"
+  bucket_prefix             = "anz-forage"
+  kms_key_ring              = "${module.gcs_bucket_kms_key_ring.cde_key_ring}"
+}
+
