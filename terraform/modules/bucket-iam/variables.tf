@@ -7,6 +7,7 @@ variable bucket_name {}
 variable role_id {
   default = ""
 }
+
 variable members {
   # If this members variable is the empty list then the resource won't get created.
   type    = "list"

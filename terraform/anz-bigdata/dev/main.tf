@@ -26,14 +26,21 @@ module "bucket_sa_account" {
 }
 
 module "gcs_bucket_kms_key_ring" {
-  source                    = "./modules/kms-cmek-keyring"
+  source                    = "../../modules/kms-cmek-keyring"
   project_id                = "${var.project}"
 }
 
 module "bucket_request" {
-  source                    = "./modules/gcs-bucket"
+  source                    = "../../modules/gcs-bucket"
   project_id                = "${var.project}"
   bucket_prefix             = "anz-forage"
   kms_key_ring              = "${module.gcs_bucket_kms_key_ring.cde_key_ring}"
 }
+
+module "bucket_iam_ingestion_sa" {
+  source                    = "../../modules/bucket-iam"
+  bucket_name               = "${module.bucket_request.bucket_name}"
+  members                   = ["${module.bucket_sa_account.email}"]
+}
+
 

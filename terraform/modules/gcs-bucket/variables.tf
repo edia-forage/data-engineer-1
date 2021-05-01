@@ -50,3 +50,7 @@ variable "bucket_policy_only" {
   description = "Disable object permissions on bucket"
   default = true
 }
+
+variable "role_id" {
+  default = "roles/storage.admin"
+}
