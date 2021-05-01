@@ -65,6 +65,21 @@ module "ingestion_sa_dataflow_role" {
   members                   = ["serviceAccount:${module.bucket_sa_account.sa_email}"]
 }
 
+data "google_iam_policy" "admin" {
+  binding {
+    role = "roles/iam.serviceAccountUser"
+
+    members = [
+      "serviceAccount:var.cicd_sa",
+    ]
+  }
+}
+
+resource "google_service_account_iam_policy" "admin-account-iam" {
+  service_account_id = module.bucket_sa_account.sa_name
+  policy_data        = data.google_iam_policy.admin.policy_data
+}
+
 module "data_flow_job1" {
   source                = "../../modules/dataflow"
   project_id            = var.project
