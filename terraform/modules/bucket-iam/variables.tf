@@ -19,3 +19,7 @@ variable authoritative {
   description = "If True will overwrite all IAM policies on the given bucket. See See https://www.terraform.io/docs/providers/google/r/storage_bucket_iam.html"
 }
 
+variable "role_id" {
+  default = "roles/storage.admin"
+}
+

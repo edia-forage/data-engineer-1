@@ -51,6 +51,3 @@ variable "bucket_policy_only" {
   default = true
 }
 
-variable "role_id" {
-  default = "roles/storage.admin"
-}
