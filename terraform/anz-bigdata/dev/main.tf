@@ -53,9 +53,34 @@ module "bucket_iam_ingestion_sa" {
 
 module "bucket_iam_transformed_sa" {
   source                    = "../../modules/bucket-iam"
+  project_id                = "${var.project}"
   role_id                   = "roles/storage.admin"
   bucket_name               = "${module.transformed_bucket_request.bucket_name}"
   members                   = ["serviceAccount:${module.bucket_sa_account.sa_email}"]
 }
 
+module "ingestion_sa_dataflow_role" {
+  source                    = "../../modules/iam"
+  project                   = "${var.project}"
+  role_name                 = "roles/dataflow.worker"
+  members                   = ["serviceAccount:${module.bucket_sa_account.sa_email}"]
+}
 
+module "data_flow_job1" {
+  source                = "../../modules/dataflow"
+  project_id            = var.project
+  name                  = "wordcount-terraform-example"
+  on_delete             = "cancel"
+  max_workers           = 1
+  template_gcs_path     = "gs://dataflow-templates/latest/Word_Count"
+  temp_gcs_location     = module.transformed_bucket_request.bucket_name
+  service_account_email = module.bucket_sa_account.sa_email
+  network_self_link     = module.vpc.network_self_link
+  subnetwork_self_link  = module.vpc.sub_network_self_link[0]
+  machine_type          = "n1-standard-1"
+
+  parameters = {
+    inputFile = "gs://anz-raw-anz-bigdata/shakespeare/kinglear.txt"
+    output    = "gs://anz-transformed-anz-bigdata/output/my_output"
+  }
+}
