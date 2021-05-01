@@ -14,6 +14,6 @@ output "network_self_link" {
 }
 
 output "sub_network_self_link" {
-  value       = google_compute_network.network-with-private-secondary-ip-ranges.self_link
+  value       = google_compute_subnetwork.network-with-private-secondary-ip-ranges.self_link
   description = "The URI of the sub network link being created"
 }
