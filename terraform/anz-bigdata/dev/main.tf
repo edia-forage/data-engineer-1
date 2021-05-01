@@ -53,7 +53,6 @@ module "bucket_iam_ingestion_sa" {
 
 module "bucket_iam_transformed_sa" {
   source                    = "../../modules/bucket-iam"
-  project_id                = "${var.project}"
   role_id                   = "roles/storage.admin"
   bucket_name               = "${module.transformed_bucket_request.bucket_name}"
   members                   = ["serviceAccount:${module.bucket_sa_account.sa_email}"]
