@@ -8,15 +8,6 @@ resource "google_compute_network" "network" {
   mtu                             = "${var.mtu}"
 }
 
-/******************************************
-	Shared VPC
- *****************************************/
-resource "google_compute_shared_vpc_host_project" "shared_vpc_host" {
-  provider = google-beta
-
-  project    = "${var.project}"
-  depends_on = [google_compute_network.network]
-}
 
 resource "google_compute_subnetwork" "network-with-private-secondary-ip-ranges" {
   name          = "${var.env}-subnetwork"
