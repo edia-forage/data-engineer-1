@@ -1,0 +1,27 @@
+{
+    "name": "ANZ Trans Loader",
+    "description": "A sample dataflow job template to load ANZ synthesised trans.",
+    "parameters": [
+      {
+        "name": "input",
+        "label": "Pub/Sub input subscription.",
+        "helpText": "Pub/Sub subscription to read from."
+      },
+      {
+        "name": "output-schema",
+        "label": "output schema for avro",
+        "helpText": "to write avro output file"
+      },
+      {
+        "name": "input-schema",
+        "label": "csv input schema",
+        "helpText": "to read input file"
+      },
+      {
+        "name": "output",
+        "label": "output file path",
+        "helpText": "gcs storage path for output file"
+      }
+    ]
+  }
+  
