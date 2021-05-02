@@ -2,7 +2,7 @@
 
 ## Initial Setup of the project
 
-After creating your GCP project, please enable following API services.
+### 1. After creating your GCP project, please enable following API services.
 
 a. Compute Engine API
 
@@ -14,6 +14,12 @@ d. Identity and Access Management (IAM) API
 
 e. Cloud Monitoring 
 
+### 2. Grant following Roles to default cloudbuild sa.
+
+[Cloud Build Service Account, 
+Cloud KMS Admin, 
+Editor, 
+Security Admin]
 
 ## Structure of the project
 
