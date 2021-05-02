@@ -1,0 +1,46 @@
+steps:
+- id: "copy data file"
+  name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  args: ['gsutil', 'cp', '-r', 'input/', 'gs://anz-raw-anz-bigdata/systemA/']
+
+- id: "copy schema files"
+  name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  args: ['gsutil', 'cp', '-r', 'schemas/', 'gs://anz-raw-anz-bigdata/systemA/schemas']
+
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'precache_images'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      docker pull asia.gcr.io/$PROJECT_ID/${_IMAGE_NAME}; \
+      exit 0
+
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'build_app'
+  waitFor: ['precache_images']
+  entrypoint: 'bash'
+  args:
+    - 'c'
+    - |
+      docker build -t anz-trans-modifier .
+      exit 0
+
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'tag_app_image'
+  waitFor: ['build_app']
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      docker tag asia.gcr.io/$PROJECT_ID/${_IMAGE_NAME}:latest asia.gcr.io/$PROJECT_ID/${_IMAGE_NAME}:${SHORT_SHA};
+      exit 0
+
+images:
+  - 'asia.gcr.io/$PROJECT_ID/${_IMAGE_NAME}:${SHORT_SHA}'
+
+substitutions:
+  _IMAGE_NAME: anz-trans-modifier
+
+  
+

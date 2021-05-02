@@ -1,0 +1,32 @@
+{
+   "type" : "record",
+   "namespace" : "anz",
+   "name" : "trans",
+   "fields" : [
+      { "name" : "status" , "type" : "string", "default": null },
+      { "name" : "card_present_flag" , "type" : "string", "default": null },
+      { "name" : "bpay_biller_code" , "type" : "string", "default": null },
+      { "name" : "account" , "type" : "string", "default": null },
+      { "name" : "currency" , "type" : "string", "default": null },
+      { "name" : "long" , "type" : "string", "default": null },
+      { "name" : "lat" , "type" : "string", "default": null },
+      { "name" : "txn_description" , "type" : "string", "default": null },
+      { "name" : "merchant_id" , "type" : "string", "default": null },
+      { "name" : "merchant_code" , "type" : "string", "default": null},
+      { "name" : "first_name" , "type" : "string", "default": null },
+      { "name" : "balance" , "type" : "string", "default": null},
+      { "name" : "date" , "type" : "string", "default": null },
+      { "name" : "gender" , "type" : "string", "default": null },
+      { "name" : "age" , "type" : "string", "default": null },
+      { "name" : "merchant_suburb" , "type" : "string", "default": null },
+      { "name" : "merchant_state" , "type" : "string", "default": null },
+      { "name" : "extraction" , "type" : "string", "default": null },
+      { "name" : "amount" , "type" : "string", "default": null },
+      { "name" : "transaction_id" , "type" : "string", "default": null },
+      { "name" : "country" , "type" : "string", "default": null },
+      { "name" : "customer_id" , "type" : "string", "default": null },
+      { "name" : "merchant_long" , "type" : "string", "default": null },
+      { "name" : "merchant_lat" , "type" : "string", "default": null },
+      { "name" : "movement" , "type" : "string", "default": null }
+   ]
+}
