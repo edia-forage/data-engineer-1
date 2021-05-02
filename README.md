@@ -2,6 +2,17 @@
 
 ## Initial Setup of the project
 
+After creating your GCP project, please enable following API services.
+
+a. Compute Engine API
+
+b. Cloud Build API
+
+c. DataFlow API
+
+d. Identity and Access Management (IAM) API	
+
+e. Cloud Monitoring 
 
 
 ## Structure of the project
