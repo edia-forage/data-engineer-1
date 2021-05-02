@@ -1,5 +1,25 @@
 # dataengineer-forage
 
+## Initial Setup of the project
+
+
+
+## Structure of the project
+
+terraform - Contains all the infrastrcutre configuration required to run the dataflow jobs. From vpc to buckets etc.
+
+dataflow - python module contains the definition of data pipeline.
+
+input - input data file
+
+schemas - schema files to read & write.
+
+## Cloud build setup
+
+terraform/infra-cloudbuild.yaml   -- Configure cloudbuild trigger to run while merging anything to dev branch to deploy all infra changes.
+
+deploy-cloudbuild.yaml - Configure another cloudbuild tigger to run the job template as container build & move all the metadata to gcs.
+
 
 ## To Build Dataflow template as docker
 
