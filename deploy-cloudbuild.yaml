@@ -21,7 +21,7 @@ steps:
   waitFor: ['precache_images']
   entrypoint: 'bash'
   args:
-    - 'c'
+    - '-c'
     - |
       docker build -t anz-trans-modifier .
       exit 0
@@ -42,5 +42,5 @@ images:
 substitutions:
   _IMAGE_NAME: anz-trans-modifier
 
-  
+
 
