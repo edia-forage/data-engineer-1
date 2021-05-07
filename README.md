@@ -1,4 +1,4 @@
-# dataengineer-forage
+# Data Engineer Challenge
 
 ## Initial Setup of the project
 
